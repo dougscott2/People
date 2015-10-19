@@ -15,11 +15,11 @@ public class People {
         HashMap<String, ArrayList<Person>> map = new HashMap();
         String fileContent = readFile("people.csv");
         String[] lines = fileContent.split("\n"); //
-        String names;
-
+        int x = 0;
 
         for (String line : lines) {
 
+            if (x != 0){
             String[] columns = line.split(",");
             String id = columns[0];
             String firstName = columns[1];
@@ -28,27 +28,26 @@ public class People {
             String country = columns[4];
             String ipAddress = columns[5];
 
-            Person p = new Person(firstName, lastName, country); //new country object is created with the abbreviation and name
-            String name = String.valueOf(lastName);
-            ArrayList<Person> list = map.get(country);
+              Person p = new Person(firstName, lastName, country); //new country object is created with the abbreviation and name
+              String name = String.valueOf(lastName);
+              ArrayList<Person> list = map.get(country);
 
-                 if (list == null) {
-                     list = new ArrayList();
-                     list.add(p);
-                     map.put(country, list);
-                 } else {
-                     list.add(p);
-                 }
-
-
-            Collections.sort(list);
-
+              if (list == null) {
+                  list = new ArrayList();
+                  list.add(p);
+                  map.put(country, list);
+              } else {
+                  list.add(p);
+              }
+              x++;
+              Collections.sort(list);
+          }
+            x++;
         }//for
 
         System.out.println(map.toString());
+
     }//end main
-
-
 
 
     static String readFile(String fileName) {
