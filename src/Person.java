@@ -19,6 +19,7 @@ public class Person implements Comparable{
     public String toString(){
         return String.format("%s %s from %s \n", firstName, lastName, country);
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -42,8 +43,7 @@ public class Person implements Comparable{
     @Override
     public int compareTo(Object o) {
         Person p = (Person) o;
-        int result = lastName.compareTo(p.lastName);
-        return result;
+        return lastName.compareTo(p.lastName);
     }
 }
 

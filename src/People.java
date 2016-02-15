@@ -15,7 +15,9 @@ public class People {
         HashMap<String, ArrayList<Person>> map = new HashMap();
         String fileContent = readFile("people.csv");
         String[] lines = fileContent.split("\n"); //
+        String printStr = "";
         int x = 0;
+        ArrayList<Person> allPeople = new ArrayList<>();
 
         for (String line : lines) {
 
@@ -29,13 +31,14 @@ public class People {
             String ipAddress = columns[5];
 
               Person p = new Person(firstName, lastName, country); //new country object is created with the abbreviation and name
-              String name = String.valueOf(lastName);
+              allPeople.add(p);
+                String name = String.valueOf(lastName);
               ArrayList<Person> list = map.get(country);
 
               if (list == null) {
                   list = new ArrayList();
                   list.add(p);
-                  map.put(country, list);
+                  map.put(p.country, list);
               } else {
                   list.add(p);
               }
@@ -43,9 +46,16 @@ public class People {
               Collections.sort(list);
           }
             x++;
+
         }//for
 
-        System.out.println(map.toString());
+        for (String countryName : map.keySet()){
+            for (Person p : map.get(countryName)){
+                printStr += String.format("%s %s from %s\n", p.firstName, p.lastName, p.country);
+            }
+        }
+
+        System.out.println(printStr);
 
     }//end main
 
